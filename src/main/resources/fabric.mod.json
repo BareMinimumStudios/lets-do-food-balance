@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "id": "food_balance",
+  "version": "${version}",
+  "name": "Let's Do Food Balance",
+  "description": "Balances selected food and drink effects from Let's Do: Vinery, Brewery, and Farm & Charm with per-drink effect and Vinery aging controls, plus optional Incapacitated compatibility.",
+  "authors": [
+    "Bare Minimum Studios",
+    "pokesmells"
+  ],
+  "license": "BML-1.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      {
+        "adapter": "kotlin",
+        "value": "net.bms.foodbalance.FoodBalanceFabricEntrypoint"
+      }
+    ],
+    "client": [
+      {
+        "adapter": "kotlin",
+        "value": "net.bms.foodbalance.client.FoodBalanceClientEntrypoint"
+      }
+    ],
+    "modmenu": [
+      {
+        "adapter": "kotlin",
+        "value": "net.bms.foodbalance.client.FoodBalanceModMenu"
+      }
+    ]
+  },
+  "mixins": [
+    "food_balance.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": "*",
+    "fabric-language-kotlin": "*",
+    "minecraft": "1.21.1",
+    "java": ">=21"
+  },
+  "suggests": {
+    "modmenu": "*",
+    "farm_and_charm": "*",
+    "brewery": "*",
+    "vinery": "*",
+    "incapacitated": "*"
+  },
+  "icon": "assets/food_balance/icon.png"
+}

@@ -1,0 +1,17 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.bms.foodbalance.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "food-balance-refmap.json",
+  "mixins": [
+    "ItemStackMixin",
+    "LivingEntityMixin",
+    "FoodBlockMixin",
+    "IncapacitatedMixin",
+    "WineYearsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
