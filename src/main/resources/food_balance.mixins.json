@@ -6,10 +6,12 @@
   "refmap": "food-balance-refmap.json",
   "mixins": [
     "ItemStackMixin",
+    "AbstractContainerMenuMixin",
     "LivingEntityMixin",
     "FoodBlockMixin",
     "IncapacitatedMixin",
-    "WineYearsMixin"
+    "WineYearsMixin",
+    "WineDebugCommandsMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -81,21 +81,22 @@ class WineAgingConfigScreen(
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         renderBackground(graphics, mouseX, mouseY, partialTick)
-        graphics.drawCenteredString(font, title, width / 2, 20, 0xFFFFFF)
+        super.render(graphics, mouseX, mouseY, partialTick)
+
+        graphics.drawCenteredString(font, title, width / 2, 20, 0xFFFFFFFF.toInt())
         graphics.drawCenteredString(
             font,
             Component.literal("Maximum Age: ${capText()}"),
             width / 2,
             height / 2 - 54,
-            0xFFFFFF
+            0xFFFFFFFF.toInt()
         )
         graphics.drawCenteredString(
             font,
-            Component.literal("Vinery still applies its normal effect level and duration limits").withStyle(ChatFormatting.GRAY),
+            Component.literal("Vinery's normal effect limits still apply").withStyle(ChatFormatting.GRAY),
             width / 2,
             height / 2 + 28,
-            0xA0A0A0
+            0xFFA0A0A0.toInt()
         )
-        super.render(graphics, mouseX, mouseY, partialTick)
     }
 }

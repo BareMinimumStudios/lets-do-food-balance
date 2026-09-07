@@ -1,6 +1,7 @@
 package net.bms.foodbalance.mixin;
 
 import net.bms.foodbalance.ConsumptionContext;
+import net.bms.foodbalance.VineryAging;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -13,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 abstract class ItemStackMixin {
     @Inject(method = "finishUsingItem", at = @At("HEAD"))
     private void begin(Level level, LivingEntity entity, CallbackInfoReturnable<ItemStack> cir) {
+        if (!level.isClientSide) VineryAging.normalize((ItemStack) (Object) this);
         ConsumptionContext.INSTANCE.push((ItemStack) (Object) this);
     }
 

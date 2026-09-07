@@ -9,8 +9,10 @@ object FoodBalance {
 
     @JvmStatic
     fun init() {
+        FoodBalanceComponents.init()
         BalanceConfig.load()
         VineryStacking.init()
+        VineryMigration.init()
         LOGGER.info("loaded food balance configuration.")
     }
 }

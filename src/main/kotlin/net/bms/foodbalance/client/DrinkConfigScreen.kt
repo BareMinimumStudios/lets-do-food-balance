@@ -73,7 +73,7 @@ class DrinkConfigScreen(
     }
 
     private fun entriesPerPage(): Int {
-        return ((height - 105) / 32).coerceIn(3, 6)
+        return ((height - 105) / 32).coerceIn(1, 6)
     }
 
     private fun isDisabled(itemId: String): Boolean {
@@ -120,14 +120,16 @@ class DrinkConfigScreen(
         val currentPage = page.coerceIn(0, pages - 1)
         val entries = drinks.drop(currentPage * perPage).take(perPage)
 
-        graphics.drawCenteredString(font, Component.literal("${type.title} (${currentPage + 1}/$pages)"), width / 2, 12, 0xFFFFFF)
+        super.render(graphics, mouseX, mouseY, partialTick)
+
+        graphics.drawCenteredString(font, Component.literal("${type.title} (${currentPage + 1}/$pages)"), width / 2, 12, 0xFFFFFFFF.toInt())
         graphics.drawCenteredString(
             font,
             Component.literal(if (type == Type.VINERY) "Configure each drink's effect and maximum age" else "Toggle each drink's special effect")
                 .withStyle(ChatFormatting.GRAY),
             width / 2,
             24,
-            0xA0A0A0
+            0xFFA0A0A0.toInt()
         )
 
         entries.forEachIndexed { index, drink ->
@@ -136,11 +138,10 @@ class DrinkConfigScreen(
                 Component.literal(drink.effectName).withStyle(ChatFormatting.DARK_GRAY),
                 width / 2,
                 63 + index * 32,
-                0x808080
+                0xFF808080.toInt()
             )
         }
 
-        super.render(graphics, mouseX, mouseY, partialTick)
     }
 
     enum class Type(val title: String) {

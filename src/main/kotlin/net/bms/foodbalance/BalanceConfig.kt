@@ -7,6 +7,7 @@ import com.google.gson.JsonParser
 import net.fabricmc.loader.api.FabricLoader
 import java.nio.file.Files
 import java.nio.file.Path
+import java.nio.file.StandardCopyOption
 
 object BalanceConfig {
     private val gson: Gson = GsonBuilder().setPrettyPrinting().create()
@@ -40,8 +41,20 @@ object BalanceConfig {
     fun save() {
         try {
             Files.createDirectories(path.parent)
-            Files.newBufferedWriter(path).use { writer ->
+            val temporary = path.resolveSibling("${path.fileName}.tmp")
+            Files.newBufferedWriter(temporary).use { writer ->
                 gson.toJson(value, writer)
+            }
+
+            try {
+                Files.move(
+                    temporary,
+                    path,
+                    StandardCopyOption.REPLACE_EXISTING,
+                    StandardCopyOption.ATOMIC_MOVE
+                )
+            } catch (_: java.nio.file.AtomicMoveNotSupportedException) {
+                Files.move(temporary, path, StandardCopyOption.REPLACE_EXISTING)
             }
         } catch (exception: Exception) {
             FoodBalance.LOGGER.error("failed to write {}.", path, exception)

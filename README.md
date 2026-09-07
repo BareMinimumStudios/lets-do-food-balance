@@ -16,6 +16,10 @@ Farmer's Blessing, Grandma's Blessing, and Stoutheart can be controlled independ
 
 Each Vinery drink can also have its own maximum age. `Vinery Default` leaves Vinery's normal aging behavior untouched and does not add an age ceiling, `0` disables aging for that drink, and any positive value caps its effective age at that many years. Vinery's own maximum effect level and maximum duration still apply independently.
 
+Vinery's `/wine age <years>` debug command is supported. It can assign the requested raw age even when the world is younger than that value; the configured per-wine maximum still controls the wine's effective age.
+
+Existing Vinery bottles are migrated to the current Vinery aging and effect settings without a global inventory tick or chunk-container scan. Player inventories and ender chests are checked once when a player joins, a container stack is checked only when a player actually interacts with that slot, and an individual bottle is checked again when Vinery evaluates or consumes it. Unopened loot containers are never touched by the migration. The brewed date is preserved while stored rule values are refreshed.
+
 Brewery's Drunk effect can be controlled separately from each drink's special effect.
 
 Disabled effect lines are hidden from item tooltips. Vinery aging information and Brewery quality information remain visible.
@@ -37,4 +41,4 @@ When Incapacitated golden-food handling is disabled, the following items keep th
 
 Mod Menu and Incapacitated are optional.
 
-- Vinery wine, cider, mead, and special drink bottles stack to a maximum of 4
+Vinery wine, cider, mead, and special drink bottles stack to a maximum of 4.

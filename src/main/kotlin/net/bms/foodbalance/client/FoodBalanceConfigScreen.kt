@@ -101,7 +101,7 @@ class FoodBalanceConfigScreen(private val parent: Screen) : Screen(Component.lit
 
     override fun render(graphics: GuiGraphics, mouseX: Int, mouseY: Int, partialTick: Float) {
         renderBackground(graphics, mouseX, mouseY, partialTick)
-        graphics.drawCenteredString(font, title, width / 2, 20, 0xFFFFFF)
         super.render(graphics, mouseX, mouseY, partialTick)
+        graphics.drawCenteredString(font, title, width / 2, 20, 0xFFFFFFFF.toInt())
     }
 }

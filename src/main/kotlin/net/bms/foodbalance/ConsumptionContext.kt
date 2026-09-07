@@ -5,17 +5,18 @@ import net.minecraft.world.item.ItemStack
 import java.util.ArrayDeque
 
 object ConsumptionContext {
-    private val entries: ThreadLocal<ArrayDeque<Entry>> = ThreadLocal.withInitial(::ArrayDeque)
+    private val entries: ThreadLocal<ArrayDeque<Entry>?> = ThreadLocal()
 
     val current: Entry?
-        get() = entries.get().peekLast()
+        get() = entries.get()?.peekLast()
 
     fun push(stack: ItemStack) {
-        entries.get().addLast(Entry(BuiltInRegistries.ITEM.getKey(stack.item).toString()))
+        val values = entries.get() ?: ArrayDeque<Entry>().also(entries::set)
+        values.addLast(Entry(BuiltInRegistries.ITEM.getKey(stack.item).toString()))
     }
 
     fun pop() {
-        val values = entries.get()
+        val values = entries.get() ?: return
         if (values.isNotEmpty()) values.removeLast()
         if (values.isEmpty()) entries.remove()
     }
